@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="stationaryApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ak Shop</title>
+  <!--css part-->
+  <style>
+    /* CSS styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="text"],
+    input[type="password"],
+    button {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .create-account-form {
+      display: none;
+    }
+  </style>
+  <!--css part end-->
+</head>
+<body ng-controller="LoginController as loginCtrl">
+  <div class="login-container">
+    <h2 Align ="center">Login</h2>
+    <form ng-submit="loginCtrl.login()">
+      <input type="text" placeholder="Username" ng-model="loginCtrl.username" required>
+      <input type="password" placeholder="Password" ng-model="loginCtrl.password" required>
+      <button type="submit">Login</button>
+    </form>
+    <div>
+      <a href="#" ng-click="loginCtrl.forgotPassword()">Forget Password?</a> 
+    <a href="#" ng-click="loginCtrl.showCreateAccountForm()">Create Account</a>
+    </div>
+    <div class="create-account-form">
+      <h2>Create Account</h2>
+      <form ng-submit="loginCtrl.createAccount()">
+        <input type="text" placeholder="Username" ng-model="loginCtrl.newUsername" required>
+        <input type="password" placeholder="Password" ng-model="loginCtrl.newPassword" required>
+        <button type="submit">Create Account</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script>
+    // Angular module
+    angular.module('stationaryApp', [])
+      .controller('LoginController', function () {
+        
+    vm.users = [
+      { username: 'Anurag', password: 'Anurag' },
+      { username: 'user2', password: 'password2' },
+      { username: 'anurag', password: 'anurag@7757'}
+      // Add more users as needed
+    ];
+
+        // Placeholder for login functionality
+        vm.login = function () {
+      var foundUser = vm.users.find(function(user) {
+        return user.username === vm.username && user.password === vm.password;
+      });
+
+      if (foundUser) {
+        alert('Login successful');
+      } else {
+        alert('Invalid username or password');
+      };
+        };
+
+        // Placeholder for forgot password functionality
+        vm.forgotPassword = function () {
+          alert('Forgot password functionality');
+        };
+
+        // Toggle visibility of create account form
+        vm.showCreateAccountForm = function () {
+          var createAccountForm = document.querySelector('.create-account-form');
+          createAccountForm.style.display = 'block';
+        };
+
+        // Placeholder for create account functionality
+        vm.createAccount = function () {
+          var newUser = {
+            username: vm.newUsername,
+            password: vm.newPassword
+          };
+
+          // Make an HTTP POST request to create the account
+          $http.post('/api/create-account', newUser)
+            .then(function (response) {
+              // Account created successfully
+              alert('Account created successfully');
+            })
+            .catch(function (error) {
+              // Error occurred while creating account
+              alert('Error: ' + error.data.message);
+            });
+        };
+      });
+  </script>
+</body>
+</html>

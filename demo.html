@@ -1,0 +1,94 @@
+<html>
+    <head>
+        <style>
+            /* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -200px; /* Hide sidebar initially */
+  width: 200px;
+  height: 100%;
+  background-color: #333;
+  color: #fff;
+  padding-top: 60px;
+  transition: left 0.3s ease;
+}
+
+.sidebar a {
+  display: block;
+  padding: 15px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  background-color: #555;
+}
+
+.profile-toggle {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.profile-options {
+  position: relative;
+}
+
+/* Header Styling */
+.header {
+  background-color: #232f3e;
+  color: #ffffff;
+  padding: 20px 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+        </style>
+        <script>
+            function toggleSidebar() {
+  var sidebar = document.getElementById('sidebar');
+  if (sidebar.style.left === '0px') {
+    sidebar.style.left = '-200px';
+  } else {
+    sidebar.style.left = '0px';
+  }
+}
+
+        </script>
+    </head>
+    <body>
+<header class="header" id="header">
+    <div class="header-inner">
+      <h1>Product Listing</h1>
+      <div class="profile-options">
+        <button class="profile-toggle" onclick="toggleSidebar()"><i class="fas fa-user"></i></button>
+        <div class="sidebar" id="sidebar">
+          <a href="#">My Profile</a>
+          <a href="#">Settings</a>
+          <a href="#">Logout</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  </body>
+</html>
